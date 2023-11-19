@@ -10,19 +10,23 @@ class KriteriaController extends Controller
     //
     public function index(){
         $kriteria = Kriteria::all();
-        return view("kriteria.index", $kriteria);
+        return view("kriteria.index", compact("kriteria"));
     }
 
     public function store(Request $request){
         $request -> validate([
             'name_kriteria' => 'required|string',
             'attribute'     => 'required|string',
-            'bobot'         => 'required|number',
+            'bobot'         => 'required|numeric|min:0|max:100',
         ]);
 
-        Kriteria::create($request->all());
-        return redirect()->route('kriteria.index')
-            ->with('success','Kriteria berhasil ditambahkan');
+        Kriteria::create([
+            'name_kriteria'=> $request->get('name_kriteria'),
+            'attribute'=> $request->get('attribute'),
+            'bobot'=> $request->get('bobot'),
+        ]);
+
+        return redirect()->route('kriteria.index')->with('success','Kriteria berhasil ditambahkan');
     }
 
     public function edit(string $id){
@@ -31,19 +35,21 @@ class KriteriaController extends Controller
     }
 
     public function update(Request $request, string $id){
+        $kriteria = Kriteria::find($id);
+
         $request -> validate([
             'name_kriteria' => 'required|string',
             'attribute'     => 'required|string',
-            'bobot'         => 'required|number',
+            'bobot'         => 'required|numeric|min:0|max:100',
         ]);
 
-        Kriteria::find($id)->update($request->all());
+        $kriteria->update($request->all());
         return redirect()->route('kriteria.index')
         ->with('success', 'Kriteria berhasil diupdate');
     }
 
-    public function destroy(Kriteria $kriteria){
-        $kriteria->delete();
+    public function destroy(string $id){
+        Kriteria::find($id)->delete();
         return redirect()->route('kriteria.index')
         ->with('success','Kriteria berhasil dihapus');
     }

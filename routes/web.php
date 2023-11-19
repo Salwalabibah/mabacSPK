@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\CripsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\PenilaianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('kriteria', KriteriaController::class);
+Route::resource('alternatif', AlternatifController::class);
+Route::resource('subkriteria', CripsController::class);
+Route::resource('penilaian', PenilaianController::class);
+
+Route::get('/subkriteria/create/{kriteria}', [CripsController::class,'add'])->name('subkriteria.add');
