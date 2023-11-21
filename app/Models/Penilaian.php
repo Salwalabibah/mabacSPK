@@ -12,6 +12,6 @@ class Penilaian extends Model
     protected $fillable = [] ;
 
     public function crips(){
-        return $this->belongsTo(Crips::class, 'id_crips')
+        return $this->belongsTo(Crips::class, 'id_crips');
     }
 }
