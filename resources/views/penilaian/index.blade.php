@@ -13,10 +13,10 @@
             <h2 class="text-[20px] font-bold">Matriks Penilaian</h2>
         </div>
 
-        <div class="block md:flex p-5 border-[#eee]">
-            <div class="flex flex-col">
+        <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
+            <div class="flex flex-col ">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="inline-block min-w-full sm:px-6 lg:px-8 ">
                         <div class="overflow-hidden w-full">
                             <table
                         class="items-center overflow-x-auto w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
@@ -66,7 +66,7 @@
                                     <td
                                         class="p-2 align-middle flex just bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                         <button type="button" data-modal-target="add-criterias-{{$a->id}}" data-modal-toggle="add-criterias-{{$a->id}}"
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
+                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 ">Add</button>
                                     </td>
                                     <!-- Main modal -->
                                     <div id="add-criterias-{{ $a->id }}" tabindex="-1" aria-hidden="true"
@@ -94,13 +94,8 @@
                                                     </button>
                                                 </div>
                                                 <!-- Modal body -->
-                                                <form class="mx-3 p-4 md:p-5" id="add-criterias-{{ $a->id }}"  action="{{ $penilaianRecord ? route('penilaian.update', $penilaianRecord->id) : route('penilaian.store') }}" method="POST">
+                                                <form class="mx-3 p-4 md:p-5" id="add-criterias-{{ $a->id }}"  action="{{route('penilaian.store') }}" method="POST">
                                                     @csrf
-
-                                                    @if ($penilaianRecord)
-                                                        @method('PUT')
-                                                    @endif
-
                                                     <div class="mx-2 grid gap-4 mb-4 grid-cols-2">
                                                         <input type="text" name="id_alternatif" hidden value="{{ $a->id }}">
                                                         @foreach ($kriteria as $c)
@@ -109,7 +104,7 @@
                                                                     {{ $c->name_kriteria }}
                                                                 </label>
                                                                 <input type="number" onchange="setTwoNumberDecimal" min="0" step="0.01"
-                                                                    value="{{ $penilaianRecord ? $penilaianRecord->where('id_kriteria', $c->id)->first()->value : 0 }}"
+                                                                    value="{{ $penilaianRecord ? $penilaianRecord->where('id_kriteria', $c->id)->where('id_alternatif', $a->id)->first()->value : 0 }}"
                                                                     name="nilai[{{ $c->id }}]" id="nilai_{{ $c->id }}"
                                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                                     placeholder="" required="">
