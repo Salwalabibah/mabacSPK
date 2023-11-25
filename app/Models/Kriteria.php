@@ -15,7 +15,7 @@ class Kriteria extends Model
         'bobot',
     ] ;
 
-    public function crips(){
-        return $this->hasMany(Crips::class, 'id_kriteria');
+    public function penilaian(){
+        return $this->hasMany(Penilaian::class, 'id_kriteria');
     }
 }

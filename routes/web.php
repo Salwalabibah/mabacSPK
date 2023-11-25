@@ -27,3 +27,4 @@ Route::resource('subkriteria', CripsController::class);
 Route::resource('penilaian', PenilaianController::class);
 
 Route::get('/subkriteria/create/{kriteria}', [CripsController::class,'add'])->name('subkriteria.add');
+// Route::get('/penilaian/{id}', [PenilaianController::class,'storeUpdate'])->name('penilaian.storeUpdate');

@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+
 
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
@@ -48,5 +48,27 @@
       </section>
     </div>
     </div>
+
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+
+    <script>
+        function initializeModal(){
+            document.addEventListener('DOMContentLoaded', function() {
+            const modalButtons = document.querySelectorAll('[data-modal-toggle^="default-modal"]');
+            const modalKriteriaIdInput = document.getElementById('modal-kriteria-id');
+
+            modalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const kriteriaId = this.getAttribute('data-kriteria-id');
+                    modalKriteriaIdInput.value = kriteriaId;
+                    console.log('Button clicked! Kriteria ID:', kriteriaId);
+                });
+            });
+        });
+        }
+        // Call the function when you want to initialize the modal
+        initializeModal();
+    </script>
 </body>
 </html>

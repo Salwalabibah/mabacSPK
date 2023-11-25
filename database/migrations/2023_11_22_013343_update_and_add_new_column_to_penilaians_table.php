@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penilaian', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_alternatif');
-            $table->unsignedBigInteger('id_kriteria');
-            $table->timestamps();
+        Schema::table('penilaian', function (Blueprint $table) {
+            //
+            $table->double('value')->after('id_kriteria')->nullable();
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penilaian');
+        Schema::table('penilaian', function (Blueprint $table) {
+            //
+            $table->dropColumn('value');
+        });
     }
 };

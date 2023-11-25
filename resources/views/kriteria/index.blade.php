@@ -53,6 +53,7 @@
                             <th scope="col" class="px-6 py-4">Nama Kriteria</th>
                             <th scope="col" class="px-6 py-4">Jenis Kriteria</th>
                             <th scope="col" class="px-6 py-4">Bobot</th>
+                            <th scope="col" class="px-6 py-4">Kode</th>
                             <th scope="col" class="px-6 py-4">Aksi</th>
                           </tr>
                         </thead>
@@ -63,6 +64,7 @@
                             <td class="whitespace-nowrap px-6 py-4">{{ $kri->name_kriteria }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $kri->attribute }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $kri->bobot }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">C{{ $index+1}}</td>
                             <td class="whitespace-nowrap px-6 py-4">
                                 <form action="{{route('kriteria.destroy', $kri->id)}}" method="POST">
                                 <a href="{{route('kriteria.edit', $kri->id)}}" class="btn btn-edit border-blue-500 hover:bg-blue-600">
