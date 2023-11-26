@@ -15,17 +15,14 @@ class PerhitunganController extends Controller
     $alternatif = Alternatif::all();
     $penilaian = Penilaian::with(['alternatif', 'kriteria'])->get();
 
-    $minMax = [];
-    $maxXi = [];
-    $minXi = [];
-    $tij = [];
-
-    $desiredDecimalPlaces = 2; // Ganti dengan jumlah desimal yang diinginkan
+    $desiredDecimalPlaces = 2; // Ganti jumlah desimal
+    $criteriCount = count($kriteria);
 
     foreach ($kriteria as $k => $v) {
         foreach ($penilaian as $p => $val) {
             if ($v->id == $val->id_kriteria) {
                 $minMax[$v->id][] = $val->value;
+                $w[$v->id] = $v->bobot;
             }
         }
 
@@ -37,6 +34,7 @@ class PerhitunganController extends Controller
 
             // Initialize $tij for the current $kriteriaId
             $tij[$v->id] = [];
+            $V[$v->id][] = [];
 
             // Normalisasi
             foreach ($values as $value) {
@@ -49,16 +47,20 @@ class PerhitunganController extends Controller
                 // Format the normalized value with the desired decimal places
                 $formattedValue = number_format($normalizedValue, $desiredDecimalPlaces);
 
+                // Normalisasi
                 $tij[$v->id][] = $formattedValue;
+
+                // matriks tertimbang
+                $V[$v->id][] = number_format((($formattedValue * $v->bobot) + $v->bobot), $desiredDecimalPlaces);
+
             }
         }
     }
 
-    // dd($tij);
+    // dd($V, $w);
 
     // Kirim data ke view
-    return view('perhitungan.index', ['normalisasi' => $tij, 'kriteria'=>$kriteria, 'alternatif'=>$alternatif, 'penilaian'=>$penilaian] );
-
+    return view('perhitungan.index', ['normalisasi' => $tij, 'kriteria'=>$kriteria, 'alternatif'=>$alternatif, 'penilaian'=>$penilaian, 'pembobotan'=>$V] );
 
     }
 
