@@ -107,7 +107,7 @@
                                         <td  class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <span
                                                 class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                                                {{ $normalisasi[$c->id][($a->id)-1] ?? 'N/A' }}
+                                                {{ $normalisasi[$c->id][($a->id)-1] ?? '0' }}
                                             </span>
                                         </td>
                                     @endforeach
@@ -119,6 +119,7 @@
                 </div>
             </div>
         </div>
+
         <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
             <div class="flex flex-col ">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -160,11 +161,158 @@
                                         <td  class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <span
                                                 class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                                                {{ $pembobotan[$c->id][$a->id] ?? 'N/A' }}
+                                                {{ $pembobotan[$c->id][$a->id] ?? '0' }}
                                             </span>
                                         </td>
                                     @endforeach
                             @endforeach
+                        </tbody>
+                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
+            <div class="flex flex-col ">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full sm:px-6 lg:px-8 ">
+                        <div class="overflow-hidden w-full">
+                            <table
+                        class="items-center overflow-x-auto w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                        <thead class="align-bottom">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    Kriteria</th>
+                                    @foreach ($kriteria as $index => $c)
+                                    <th
+                                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                        C{{$index+1}}</th>
+                                    @endforeach
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td
+                                    class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                    <span
+                                        class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                       G
+                                    </span>
+                                </td >
+                                @foreach ($kriteria as $c)
+
+                                    <td  class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        <span
+                                            class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                            {{ $perkiraanBatas[$c->id] ?? '0' }}
+                                        </span>
+                                    </td>
+                                @endforeach
+
+                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
+            <div class="flex flex-col ">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full sm:px-6 lg:px-8 ">
+                        <div class="overflow-hidden w-full">
+                            <table
+                        class="items-center overflow-x-auto w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                        <thead class="align-bottom">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    Alternatif</th>
+                                    @foreach ($kriteria as $index => $c)
+                                    <th
+                                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                        C{{$index+1}}</th>
+                                    @endforeach
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($alternatif as $a)
+                                <tr>
+                                    <td
+                                        class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        <span
+                                            class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                            {{ $a->name_alternatif }}
+                                        </span>
+                                    </td >
+                                    @foreach ($kriteria as $c)
+                                        <td  class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <span
+                                                class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                                {{ $jarakAlternatif[$c->id][($a->id)-1] ?? '0' }}
+                                            </span>
+                                        </td>
+                                    @endforeach
+                            @endforeach
+                        </tbody>
+                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
+            <div class="flex flex-col ">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full sm:px-6 lg:px-8 ">
+                        <div class="overflow-hidden w-full">
+                            <table
+                        class="items-center overflow-x-auto w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                        <thead class="align-bottom">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    Ranking
+                                </th>
+                                <th
+                                    class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    Alternatif</th>
+                                <th
+                                    class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    Total
+                                </th>
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ranking as $alternativeId => $total)
+                            @php
+                                $alternative = $alternatif->where('id', $alternativeId)->first();
+                            @endphp
+                            <tr>
+                                <td class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                    <span class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                        {{ $loop->iteration }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                    <span class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                        {{ $alternative->name_alternatif }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                    <span class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                        {{ number_format($total, 2) }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                         </div>

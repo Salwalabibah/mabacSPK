@@ -11,57 +11,89 @@ class PerhitunganController extends Controller
 {
     //
     public function index(){
-    $kriteria = Kriteria::all();
-    $alternatif = Alternatif::all();
-    $penilaian = Penilaian::with(['alternatif', 'kriteria'])->get();
+        $kriteria = Kriteria::all();
+        $alternatif = Alternatif::all();
+        $penilaian = Penilaian::with(['alternatif', 'kriteria'])->get();
 
-    $desiredDecimalPlaces = 2; // Ganti jumlah desimal
-    $criteriCount = count($kriteria);
+        $desiredDecimalPlaces = 2; // Ganti jumlah desimal
 
-    foreach ($kriteria as $k => $v) {
-        foreach ($penilaian as $p => $val) {
-            if ($v->id == $val->id_kriteria) {
-                $minMax[$v->id][] = $val->value;
-                $w[$v->id] = $v->bobot;
-            }
-        }
+        // Inisialisasi variabel
 
-        // Check if there are values for the current $kriteriaId
-        if (!empty($minMax[$v->id])) {
-            $values = $minMax[$v->id];
-            $maxXi[$v->id] = max($values);
-            $minXi[$v->id] = min($values);
-
-            // Initialize $tij for the current $kriteriaId
-            $tij[$v->id] = [];
-            $V[$v->id][] = [];
-
-            // Normalisasi
-            foreach ($values as $value) {
-                if ($v->attribute == "benefit") {
-                    $normalizedValue = ($maxXi[$v->id] - $minXi[$v->id]) != 0 ? ($value - $minXi[$v->id]) / ($maxXi[$v->id] - $minXi[$v->id]) : 0;
-                } elseif ($v->attribute == "cost") {
-                    $normalizedValue = ($maxXi[$v->id] - $minXi[$v->id]) != 0 ? ($maxXi[$v->id] - $value) / ($maxXi[$v->id] - $minXi[$v->id]) : 0;
+        foreach ($kriteria as $k => $v) {
+            foreach ($penilaian as $p => $val) {
+                if ($v->id == $val->id_kriteria) {
+                    $minMax[$v->id][] = $val->value;
+                    // $w[$v->id] = $v->bobot;
                 }
+            }
 
-                // Format the normalized value with the desired decimal places
-                $formattedValue = number_format($normalizedValue, $desiredDecimalPlaces);
+            // Check if there are values for the current $kriteriaId
+            if (!empty($minMax[$v->id])) {
+                $values = $minMax[$v->id];
+                $maxXi[$v->id] = max($values);
+                $minXi[$v->id] = min($values);
+
+                // Initialize $tij and $V for the current $kriteriaId
+                $tij[$v->id] = [];
+                $V[$v->id] = [];
+                $G[$v->id] = 1;
+                $Q[$v->id] = [];
 
                 // Normalisasi
-                $tij[$v->id][] = $formattedValue;
+                foreach ($values as $value) {
+                    if ($v->attribute == "benefit") {
+                        $normalizedValue = ($maxXi[$v->id] - $minXi[$v->id]) != 0 ? ($value - $minXi[$v->id]) / ($maxXi[$v->id] - $minXi[$v->id]) : 0;
+                    } elseif ($v->attribute == "cost") {
+                        $normalizedValue = ($maxXi[$v->id] - $minXi[$v->id]) != 0 ? ($maxXi[$v->id] - $value) / ($maxXi[$v->id] - $minXi[$v->id]) : 0;
+                    }
 
-                // matriks tertimbang
-                $V[$v->id][] = number_format((($formattedValue * $v->bobot) + $v->bobot), $desiredDecimalPlaces);
+                    // Normalisasi
+                    $tij[$v->id][] = number_format($normalizedValue, $desiredDecimalPlaces);
 
+                    // Matriks tertimbang
+                    $matriksW =($normalizedValue * $v->bobot) + $v->bobot;
+                    $V[$v->id][] =  number_format($matriksW, $desiredDecimalPlaces);
+
+                    $G[$v->id] *= $matriksW;
+
+                }
+
+                // Perhitungan Perkiraan Batas
+                $G[$v->id] = number_format(pow($G[$v->id], 1 / count($alternatif)), $desiredDecimalPlaces);
+
+                // Perhitungan elemen matriks jarak alternatif dari daerah perkiraan perbatasan (Q)
+                foreach ($V[$v->id] as $value) {
+                    $Q[$v->id][] = number_format($value - $G[$v->id], $desiredDecimalPlaces);
+                }
             }
         }
+
+        // Perankingan
+        foreach($alternatif as $alt){
+            $total = 0;
+            foreach($kriteria as $kri){
+                $total += $Q[$kri->id][$alt->id-1];
+            }
+
+            $rank[$alt->id] = number_format($total, $desiredDecimalPlaces);
+        }
+        arsort($rank);
+
+        // dd($V, $G,$Q, $rank);
+
+        // Kirim data ke view
+        return view('perhitungan.index', [
+            'normalisasi' => $tij,
+            'kriteria' => $kriteria,
+            'alternatif' => $alternatif,
+            'penilaian' => $penilaian,
+            'pembobotan' => $V,
+            'perkiraanBatas' => $G,
+            'jarakAlternatif' => $Q,
+            'ranking' => $rank,
+        ]);
     }
 
-    // dd($V, $w);
 
-    // Kirim data ke view
-    return view('perhitungan.index', ['normalisasi' => $tij, 'kriteria'=>$kriteria, 'alternatif'=>$alternatif, 'penilaian'=>$penilaian, 'pembobotan'=>$V] );
-
-    }
 
 }
