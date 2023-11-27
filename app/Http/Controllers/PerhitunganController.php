@@ -6,11 +6,30 @@ use App\Models\Alternatif;
 use App\Models\Kriteria;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PerhitunganController extends Controller
 {
     //
+        public function assessmentsFilled()
+    {
+        // Check if assessments are filled (adjust this based on your data structure)
+        $assessments = Penilaian::all(); // Replace it with your actual assessment model
+        // if ($assessments->count() < 2) {
+        //     return false;
+        // }
+
+        return $assessments->isNotEmpty();
+    }
     public function index(){
+
+        if (!$this->assessmentsFilled()) {
+            Alert::error('Failed', 'Isi Matriks Penilaian terlebih dahulu');
+
+            // Redirect back or to a specific page with a message
+            return redirect()->route('penilaian.index')->with('error', 'Please fill out the assessments before viewing the ranking.');
+        }
+
         $kriteria = Kriteria::all();
         $alternatif = Alternatif::all();
         $penilaian = Penilaian::with(['alternatif', 'kriteria'])->get();
@@ -72,7 +91,15 @@ class PerhitunganController extends Controller
         foreach($alternatif as $alt){
             $total = 0;
             foreach($kriteria as $kri){
-                $total += $Q[$kri->id][$alt->id-1];
+                $key = $alt->id - 1;
+                // Check if the key exists in the $Q array
+                if (isset($Q[$kri->id][$key])) {
+                    $total += $Q[$kri->id][$key];
+                } else {
+                    // Provide a default value if the key is not set
+                    // You can adjust this default value based on your logic
+                    $total += 0;
+                }
             }
 
             $rank[$alt->id] = number_format($total, $desiredDecimalPlaces);

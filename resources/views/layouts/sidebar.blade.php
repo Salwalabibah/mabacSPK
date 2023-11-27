@@ -21,36 +21,12 @@
       </a>
     </li>
     <li>
-      <a class="link" href="profile.html">
-        <i class="fa-regular fa-user fa-fw"></i>
-        <span class="span">Profile</span>
-      </a>
-    </li>
-    <li>
-      <a class="link" href="projects.html">
-        <i class="fa-solid fa-diagram-project fa-fw"></i>
-        <span class="span">Projects</span>
-      </a>
-    </li>
-    <li>
-      <a class="link" href="courses.html">
+      <a class="link" href="{{route('perhitungan.index')}}">
         <i class="fa-solid fa-graduation-cap fa-fw"></i>
-        <span class="span">Courses</span>
+        <span class="span">Perankingan</span>
       </a>
     </li>
-    <li>
-      <a class="link" href="friends.html">
-        <i class="fa-regular fa-circle-user fa-fw"></i>
-        <span class="span">Friends</span>
-      </a>
-    </li>
-    <li>
-      <a class="link" href="plans.html">
-        <i class="fa-regular fa-credit-card fa-fw"></i>
-        <span class="span">Plans</span>
-      </a>
-    </li>
-  </ul>
+
 <script>
     $(document).ready(function () {
 

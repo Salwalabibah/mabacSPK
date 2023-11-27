@@ -9,7 +9,7 @@
 <!-- Start content -->
 <div class="flex flex-wrap mx-2.5 md:mx-5 gap-5">
     <article class="article mt-4">
-        <div class="p-10 md:p-5 flex justify-between items-center bg-white">
+        <div class="p-10 md:p-5 flex justify-between items-center bg-[#eee]">
             <h2 class="text-[20px] font-bold">Matriks Penilaian</h2>
         </div>
 

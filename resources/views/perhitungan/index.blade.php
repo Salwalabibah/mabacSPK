@@ -9,7 +9,7 @@
 <!-- Start content -->
 <div class="flex flex-wrap mx-2.5 md:mx-5 gap-5">
     <article class="article mt-4">
-        <div class="p-10 md:p-5 flex justify-between items-center bg-white">
+        <div class="p-10 md:p-5 flex justify-between items-center bg-[#eee]">
             <h2 class="text-[20px] font-bold">Matriks Penilaian</h2>
         </div>
 
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+
         <div class="block md:flex p-5 border-[#eee] justify-center items-center ">
             <div class="flex flex-col ">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -161,7 +162,7 @@
                                         <td  class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <span
                                                 class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                                                {{ $pembobotan[$c->id][$a->id] ?? '0' }}
+                                                {{ $pembobotan[$c->id][$a->id-1] ?? '0' }}
                                             </span>
                                         </td>
                                     @endforeach
