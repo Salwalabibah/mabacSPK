@@ -44,31 +44,25 @@
         <!-- Start Aside -->
       <section class="w-full overflow-hidden">
             @yield('content')
+            {{-- <div class="mx-auto mt-3">
+                <div class="flex">
+                <!-- Previous Button -->
+                    <a href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ">
+                        Previous
+                    </a>
 
+                    <!-- Next Button -->
+                    <a href="#" class="flex items-center justify-center px-4 h-10 ms-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        Next
+                    </a>
+                </div>
+            </div> --}}
       </section>
+
+
     </div>
     </div>
 
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    {{-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
-
-    <script>
-        function initializeModal(){
-            document.addEventListener('DOMContentLoaded', function() {
-            const modalButtons = document.querySelectorAll('[data-modal-toggle^="default-modal"]');
-            const modalKriteriaIdInput = document.getElementById('modal-kriteria-id');
-
-            modalButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const kriteriaId = this.getAttribute('data-kriteria-id');
-                    modalKriteriaIdInput.value = kriteriaId;
-                    console.log('Button clicked! Kriteria ID:', kriteriaId);
-                });
-            });
-        });
-        }
-        // Call the function when you want to initialize the modal
-        initializeModal();
-    </script>
-</body>
 </html>

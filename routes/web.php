@@ -19,8 +19,8 @@ use App\Http\Controllers\PerhitunganController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+}) ->name('home');
 
 Route::resource('kriteria', KriteriaController::class);
 Route::resource('alternatif', AlternatifController::class);

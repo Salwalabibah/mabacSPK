@@ -2,47 +2,35 @@
     Nader
   </h3>
   <ul>
-    <li>
-      <a class="link active" href="{{route('kriteria.index')}}">
+    <li class="{{ (request()->is('/')) ? 'active' : '' }}">
+        <a class="link" href="{{route('home')}}">
+            <i class="fa fa-tachometer"></i>
+          <span class="span"> Dashboard</span>
+        </a>
+      </li>
+    <li class="{{ (request()->is('kriteria')) ? 'active' : '' }}">
+      <a class="link" href="{{route('kriteria.index')}}">
         <i class="fa-regular fa-chart-bar fa-fw"></i>
         <span class="span">Kriteria</span>
       </a>
     </li>
-    <li>
+    <li class="{{ (request()->is('alternatif')) ? 'active' : '' }}">
       <a class="link" href="{{route('alternatif.index')}}">
         <i class="fa-regular fa-user fa-fw"></i>
         <span class="span">Alternatif</span>
       </a>
     </li>
-    <li>
+    <li class="{{ (request()->is('penilaian')) ? 'active' : '' }}">
       <a class="link" href="{{route('penilaian.index')}}">
         <i class="fa-regular fa-file fa-fw"></i>
         <span class="span">Penilaian</span>
       </a>
     </li>
-    <li>
+    <li class="{{ (request()->is('perhitungan')) ? 'active' : '' }}">
       <a class="link" href="{{route('perhitungan.index')}}">
         <i class="fa-solid fa-graduation-cap fa-fw"></i>
         <span class="span">Perankingan</span>
       </a>
     </li>
+</ul>
 
-<script>
-    $(document).ready(function () {
-
-        $("#sidebar").mCustomScrollbar({
-             theme: "minimal"
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            // open or close navbar
-            $('#sidebar').toggleClass('active');
-            // close dropdowns
-            $('.collapse.in').toggleClass('in');
-            // and also adjust aria-expanded attributes we use for the open/closed arrows
-            // in our CSS
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-
-    });
-</script>

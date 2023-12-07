@@ -35,6 +35,7 @@ class AlternatifController extends Controller
     }
 
     public function destroy(Alternatif $alternatif){
+        $alternatif->penilaian()->delete();
         $alternatif->delete();
         return redirect()->route("alternatif.index")->with("success","Alternatif berhasil dihapus");
     }

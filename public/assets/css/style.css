@@ -1944,6 +1944,7 @@ video {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 7px;
 }
 
 /* Track */
@@ -1955,13 +1956,13 @@ video {
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-  background-color: #0075ff;
+  background-color: #CCC4FF;
 }
 
 /* Hover */
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #0d69d5;
+  background-color: #c2b9fb;
 }
 
 /* Toggle CheckBox Switcher */

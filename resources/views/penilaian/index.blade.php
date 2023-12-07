@@ -8,8 +8,8 @@
 <!-- End Header -->
 <!-- Start content -->
 <div class="flex flex-wrap mx-2.5 md:mx-5 gap-5">
-    <article class="article mt-4">
-        <div class="p-10 md:p-5 flex justify-between items-center bg-[#eee]">
+    <article class="article mt-4 bg-opacity-50 border-2 border-[#CCC4FF]">
+        <div class="p-10 md:p-5 flex justify-between items-center bg-[#CCC4FF]">
             <h2 class="text-[20px] font-bold">Matriks Penilaian</h2>
         </div>
 
@@ -64,16 +64,21 @@
 
                                     {{-- Add a button --}}
                                     <td
-                                        class="p-2 align-middle flex just bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        class="p-2 align-middle flex bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                         <button type="button" data-modal-target="add-criterias-{{$a->id}}" data-modal-toggle="add-criterias-{{$a->id}}"
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 ">Add</button>
+                                            class="btn btn-edit flex mx-auto bg-[#] focus:ring-4 focus:outline-none focus:ring-[#CCC4FF]">
+                                            <span
+                                            class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
+                                                <svg class="h-6 w-6 text-gray-500 hover:text-gray-700"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                            </span>
+                                        </button>
                                     </td>
                                     <!-- Main modal -->
-                                    <div id="add-criterias-{{ $a->id }}" tabindex="-1" aria-hidden="true"
+                                    <div id="add-criterias-{{$a->id}}" tabindex="-1" aria-hidden="true"
                                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                         <div class="relative p-4 w-full max-w-md max-h-full">
                                             <!-- Modal content -->
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 pb-4 px-3">
                                                 <!-- Modal header -->
                                                 <div
                                                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -112,14 +117,14 @@
                                                         @endforeach
                                                     </div>
                                                     <button type="submit"
-                                                        class="m-2 text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                        class="bg-[#FFF785] capitalize tracking-wide text-gray-700 mb-2 p-2 w-72 m-2 block items-center hover:bg-[#eae162] focus:ring-4 focus:outline-none focus:ring-[#FFF785] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto">
+                                                        <svg class="me-1 -ms-1 w-5 h-5 inline-flex" fill="currentColor" viewBox="0 0 20 20"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd"
                                                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                                                 clip-rule="evenodd"></path>
                                                         </svg>
-                                                        Add new product
+                                                        <span class="inline-flex">Add new product</span>
                                                     </button>
                                                 </form>
 
